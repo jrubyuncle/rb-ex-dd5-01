@@ -1,2 +1,12 @@
 <h1>Sessions#new</h1>
 <p>Find me in app/views/sessions/new.html.erb</p>
+
+
+<h1>Sign in</h1>
+<%= form_tag sign_in_path do %>
+
+name:<input type="text" name="name">
+
+password: <input type="password" name="password">
+<input type="submit">
+<% end %>
