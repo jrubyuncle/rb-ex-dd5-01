@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :auth_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :check_owner, only: %i[edit update destroy]
 
   # GET /posts
   # GET /posts.json
@@ -77,4 +78,7 @@ class PostsController < ApplicationController
       redirect_to sign_in_path unless user_signed_in?
     end
 
+    def check_owner
+      redirect_to root_path if @post.user != current_user
+    end
 end
