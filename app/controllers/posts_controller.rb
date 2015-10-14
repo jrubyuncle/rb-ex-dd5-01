@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :auth_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -71,4 +72,9 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content, :user_id)
     end
+
+    def auth_user
+      redirect_to sign_in_path unless user_signed_in?
+    end
+
 end
